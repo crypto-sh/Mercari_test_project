@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="loading" type="Boolean"/>
+        <variable name="errorMessage" type="String"/>
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.activitis.MainActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    app:contentInsetStart="0dp"
+                    app:contentInsetEnd="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        style="@style/tabLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <include layout="@layout/content_main"
+                app:loading="@{loading}"
+                app:errorMessage="@{errorMessage}"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="@dimen/fab_size"
+                android:layout_height="@dimen/fab_size"
+                android:layout_margin="@dimen/card_margin"
+                app:maxImageSize="@dimen/fab_icon_size"
+                app:srcCompat="@mipmap/ic_camera"
+                app:layout_anchor="@id/constraint"
+                app:layout_anchorGravity="bottom|end"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

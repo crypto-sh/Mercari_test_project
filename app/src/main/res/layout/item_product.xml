@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="java.lang.Long"/>
+        <import type="android.view.View"/>
+        <variable name="sold" type="Boolean"/>
+        <variable name="product" type="com.mrecun.model.Product"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_divider"
+            android:layout_marginEnd="@dimen/item_divider"
+            android:layout_marginBottom="@dimen/item_divider"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="6dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <RelativeLayout
+                    android:id="@+id/imageBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <com.mrecun.ui.customView.ImageViewCustom
+                        android:id="@+id/imageViewCustom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:imageShape="square"
+                        ImageUrl="@{product.photo}"
+                        android:background="@color/colorWhite"/>
+
+                <com.mrecun.ui.customView.ImageViewCustom
+                        app:srcCompat="@mipmap/badge_soldout"
+                        VisibleOrGone="@{sold}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_textview"
+                    android:padding="@dimen/text_padding"
+                    app:layout_constraintEnd_toEndOf="@id/imageBox"
+                    app:layout_constraintStart_toStartOf="@id/imageBox"
+                    app:layout_constraintBottom_toBottomOf="@id/imageBox">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        tools:text="@tools:sample/last_names"
+                        android:text="@{product.name}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    app:layout_constraintStart_toStartOf="@id/imageBox"
+                    app:layout_constraintEnd_toEndOf="@id/imageBox"
+                    app:layout_constraintTop_toBottomOf="@id/imageBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/icon_size">
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:weightSum="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/icon_size">
+
+                        <com.mrecun.ui.customView.ImageViewCustom
+                                android:id="@+id/likeIcon"
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:src="@mipmap/icon_like"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:textColor="@color/colorText"
+                                android:text="@{Long.toString(product.num_likes)}"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/likeIcon"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/icon_size">
+
+                        <com.mrecun.ui.customView.ImageViewCustom
+                                android:id="@+id/commentIcon"
+                                android:layout_width="@dimen/icon_size"
+                                android:layout_height="@dimen/icon_size"
+                                android:src="@mipmap/icon_comment"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:text="@{Long.toString(product.num_comments)}"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/commentIcon"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end|center_vertical"
+                            android:textColor="@color/colorText"
+                            android:padding="@dimen/text_padding"
+                            android:text="@{@string/price_format(Long.toString(product.price))}"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</layout>
